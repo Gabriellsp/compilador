@@ -21,6 +21,7 @@ public class TabelaSimbolos {
     // Descobrir o que é o Id
     public Id get(Token token){
         Id found = (Id) table.get(token);
+
         if (found != null) 
             return found;
         return null;
