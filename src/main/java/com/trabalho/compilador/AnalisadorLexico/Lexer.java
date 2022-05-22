@@ -1,5 +1,6 @@
 package com.trabalho.compilador.AnalisadorLexico;
 
+import com.trabalho.compilador.TabelaDeSimbolos.TabelaSimbolos;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,6 +9,7 @@ public class Lexer {
     public static int line = 1;
     private final FileReader file;
     private char ch = ' '; 
+    private TabelaSimbolos ts;
     // instanciar TS
     // private Hashtable words = new Hashtable();
     
@@ -18,8 +20,27 @@ public class Lexer {
             System.out.println("Arquivo não encontrado");
             throw e;
         }
-        // Inserir palavras reservadas na TS
-        // reserve(new Word ("if", Tag.IF));
+        ts = new TabelaSimbolos();
+
+        ts.put(new Word("routine", Tag.ROUTINE));
+        ts.put(new Word("begin", Tag.BEGIN));
+        ts.put(new Word("end", Tag.END));
+        ts.put(new Word("declare", Tag.DECLARE));
+        ts.put(new Word("int", Tag.INT));
+        ts.put(new Word("float", Tag.FLOAT));
+        ts.put(new Word("char", Tag.CHAR));
+        ts.put(new Word("if", Tag.IF));
+        ts.put(new Word("then", Tag.THEN));
+        ts.put(new Word("else", Tag.ELSE));
+        ts.put(new Word("repeat", Tag.REPEAT));
+        ts.put(new Word("until", Tag.UNTIL));
+        ts.put(new Word("while", Tag.WHILE));
+        ts.put(new Word("do", Tag.DO));
+        ts.put(new Word("read", Tag.READ));
+        ts.put(new Word("write", Tag.WRITE));
+        ts.put(new Word("not", Tag.NOT));
+        ts.put(new Word("or", Tag.OR));
+        ts.put(new Word("and", Tag.AND));
     }
     
     private void reserve(Word w){

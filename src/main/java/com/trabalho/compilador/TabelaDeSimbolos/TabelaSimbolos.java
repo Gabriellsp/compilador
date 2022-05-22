@@ -1,30 +1,31 @@
 package com.trabalho.compilador.TabelaDeSimbolos;
 
 import com.trabalho.compilador.AnalisadorLexico.Token;
-import java.util.Hashtable;
-import com.trabalho.compilador.TabelaDeSimbolos.Id;
+import com.trabalho.compilador.AnalisadorLexico.Word;
+import java.util.HashMap;
 
 public class TabelaSimbolos {
-    static Hashtable table; 
+    static HashMap table; 
 //    protected TabelaSimbolos prev; 
      
     public TabelaSimbolos(){
-        table = new Hashtable(); //cria a TS para o ambiente
+        table = new HashMap(); //cria a TS para o ambiente
 //        prev = n; //associa o ambiente atual ao anterior
     }
     
     // descobrir o que é o Id
-    public void put(Token token /*, Id i*/){
-        table.put(token,'i'); // alterar para i variável
+    public void put(Word w){
+        table.put(w.toString(), w);
     }
     
     // Descobrir o que é o Id
-    public Id get(Token token){
-        Id found = (Id) table.get(token);
+    public Object get(Token token){
+        Object found = table.get(token);
 
         if (found != null) 
             return found;
         return null;
+
 //        for (TabelaSimbolos e = this; e!=null; e = e.prev){
 //            Id found = (Id) e.table.get(w);
 //            if (found != null) //se Token existir em uma das TS
