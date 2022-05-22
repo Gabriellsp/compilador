@@ -59,7 +59,7 @@ public class Lexer {
         return true;
     }
     
-    public Token scan() throws IOException{
+    public Token scan() throws IOException, Exception{
         for (;; readch()) {
             if (ch == ' ' || ch == '\t' || ch == '\r' || ch == '\b') continue;
             else if (ch == '\n') line++;
@@ -126,17 +126,49 @@ public class Lexer {
             case ']' -> {
                 return Word.CBR;
             }
+            case '\'' -> {
+                readch();
+                char const_char = ch;
+                if(readch('\'')) return new Word(const_char+"", Tag.CONST_CHAR);
+                throw new Exception("Aspas simples de CHAR_CONST não fechada");
+            }
+            case '\"' -> {
+                var sb = new StringBuffer();
+                do{
+                    sb.append(ch);
+                    readch();
+                }while(ch != '\"');
+                
+                String s = sb.toString();
+                Word word = (Word)ts.get(s);
+                if (word != null) return word; 
+                word = new Word(s, Tag.LITERAL);
+                ts.put(word);
+                return word;
+            }
+            
         }
         
         //Números
         if (Character.isDigit(ch)){
-            int value=0;
+            int valueInt=0;
             do{
-                value = 10*value + Character.digit(ch,10);
+                valueInt = 10*valueInt + Character.digit(ch,10);
                 readch();
             }while(Character.isDigit(ch));
-
-            return new Num(value);
+            if(ch != '.'){
+                return new Int(valueInt);
+            }
+            
+            float valueFloat = valueInt;
+            float decimal = 10;
+            for(;;) {
+                readch();
+                if(!Character.isDigit(ch) ) break;
+                valueFloat = valueFloat + Character.digit(ch, 10) / decimal; 
+                decimal = decimal*10;
+            }
+            return new Float(valueFloat);
         }
         
         //Identificadores
@@ -148,11 +180,11 @@ public class Lexer {
             }while(Character.isLetterOrDigit(ch));
             
             String s = sb.toString();
-//            Word w = (Word)words.get(s);
-//            if (w != null) return w; //palavra já existe na HashTable
-//            w = new Word (s, Tag.ID);
-//            words.put(s, w);
-//            return w;
+            Word w = (Word)ts.get(s);
+            if (w != null) return w; //palavra já existe na HashTable
+            w = new Word(s, Tag.ID);
+            ts.put(w);
+            return w;
         }
         
         //Caracteres não especificados

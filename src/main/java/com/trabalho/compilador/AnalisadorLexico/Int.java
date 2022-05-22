@@ -1,11 +1,11 @@
 package com.trabalho.compilador.AnalisadorLexico;
 
-public class Num extends Token {
+public class Int extends Token {
     
     public final int value;
     
-    public Num(int value){
-        super(Tag.NUM);
+    public Int(int value){
+        super(Tag.INT);
         this.value = value;
     }
     public String toString(){

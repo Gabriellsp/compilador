@@ -19,7 +19,7 @@ public class TabelaSimbolos {
     }
     
     // Descobrir o que é o Id
-    public Object get(Token token){
+    public Object get(String token){
         Object found = table.get(token);
 
         if (found != null) 

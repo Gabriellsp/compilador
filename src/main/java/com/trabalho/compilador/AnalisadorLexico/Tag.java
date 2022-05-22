@@ -44,9 +44,10 @@ public class Tag {
             NOT=235,
             OR=236,
             AND=237,
-     
             
-
-            NUM=1
+            ID=238,
+            CONST_CHAR=239,
+            LITERAL=240
+            
             ;
 }
