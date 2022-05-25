@@ -59,10 +59,20 @@ public class Lexer {
         return true;
     }
     
+    public void returnTokensFromFile() throws Exception {    
+        while(ch != 65535) {
+            var token = scan();
+            System.out.println("Token: "+ token.toString());
+            
+        }
+    }
+    
     public Token scan() throws IOException, Exception{
-        for (;; readch()) {
-            if (ch == ' ' || ch == '\t' || ch == '\r' || ch == '\b') continue;
-            else if (ch == '\n') line++;
+        for( ; ; readch() ) {
+            if( ch == ' ' || ch == '\t' ) 
+                continue;
+            else if( ch == '\n' ) 
+                line = line + 1;
             else break;
         }
         switch(ch){
@@ -83,18 +93,23 @@ public class Lexer {
                 };
             }
             case '=' -> {
+                readch();
                 return Word.eq;
             }
             case '+' -> {
+                readch();
                 return Word.sum;
             }
             case '-' -> {
+                readch();
                 return Word.dif;
             }
             case '*' -> {
+                readch();
                 return Word.mult;
             }
             case '/' -> {
+                readch();
                 return Word.div;
             }
             case ':' -> {
@@ -102,35 +117,47 @@ public class Lexer {
                     return Word.assign;
                 }
                 else {
-                    return new Token(':');
+                    throw new Exception("Símbolo de atribuição inválido! Linha "+line);
+//                    return new Token(':');
                 }
             }
             case '(' -> {
+                readch();
                 return Word.OP;
             }
             case ')' -> {
+                readch();
                 return Word.CP;
             }
             case ';' -> {
+                readch();
                 return Word.semi;
             }
             case '{' -> {
+                readch();
                 return Word.OB;
             }
             case '}' -> {
+                readch();
                 return Word.CB;
             }
             case '[' -> {
+                readch();
                 return Word.OBR;
             }
             case ']' -> {
+                readch();
                 return Word.CBR;
+            }
+            case ',' -> {
+                readch();
+                return Word.comma;
             }
             case '\'' -> {
                 readch();
                 char const_char = ch;
                 if(readch('\'')) return new Word(const_char+"", Tag.CONST_CHAR);
-                throw new Exception("Aspas simples de CHAR_CONST não fechada");
+                throw new Exception("Aspas simples de CHAR_CONST não fechada! Linha "+line);
             }
             case '\"' -> {
                 var sb = new StringBuffer();
@@ -138,6 +165,9 @@ public class Lexer {
                     sb.append(ch);
                     readch();
                 }while(ch != '\"');
+                if(ch=='\"') sb.append(ch);
+                else throw new Exception("Aspas duplas de LITERAK não fechada! Linha "+line);
+                readch();
                 
                 String s = sb.toString();
                 Word word = (Word)ts.get(s);
@@ -145,6 +175,23 @@ public class Lexer {
                 word = new Word(s, Tag.LITERAL);
                 ts.put(word);
                 return word;
+            }
+            case '%' -> {
+                var sb = new StringBuffer();
+                do {
+                    readch();
+                    sb.append(ch);
+                    if(ch=='%'){
+                        String s = sb.toString();
+                        Word word = (Word) ts.get(s);
+                        if (word != null) return word; 
+                        word = new Word(s, Tag.BLOC_COMMENT);
+                        ts.put(word);
+                        return word;
+                    }
+                }
+                while(ch != -1);
+                 throw new Exception("Comentário não fechado! Linha "+line);
             }
             
         }

@@ -47,7 +47,9 @@ public class Tag {
             
             ID=238,
             CONST_CHAR=239,
-            LITERAL=240
+            LITERAL=240,
+            BLOC_COMMENT=241,
+            COMMA= 242
             
             ;
 }

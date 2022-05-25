@@ -24,7 +24,7 @@ public class Word extends Token{
     public static final Word assign = new Word (":=", Tag.ASSIGN_STATEMENT);
     public static final Word OBR = new Word ("[", Tag.OBR);
     public static final Word CBR = new Word ("]", Tag.CBR);
-    
+    public static final Word comma = new Word (",", Tag.COMMA);
     
     public Word (String s, int tag){
         super (tag);
