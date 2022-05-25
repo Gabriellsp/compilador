@@ -59,12 +59,17 @@ public class Lexer {
         return true;
     }
     
-    public void returnTokensFromFile() throws Exception {    
+    public void returnTokensFromFile() throws Exception {  
+        System.out.println("---------------------------------TOKENS---------------------------------");
         while(ch != 65535) {
             var token = scan();
-            System.out.println("Token: "+ token.toString());
+            System.out.println("Token: "+ token.toString() +" - "+ token.tag);
             
         }
+        System.out.println("\n");
+         System.out.println("-------------------------TABELA DE SÍMBOLOS----------------------------");
+        System.out.println("TABELA DE SÍMBOLOS:");
+        ts.imprimirTable();
     }
     
     public Token scan() throws IOException, Exception{
@@ -117,6 +122,7 @@ public class Lexer {
                     return Word.assign;
                 }
                 else {
+                    System.out.println("---------------------------------ERROR----------------------------------");
                     throw new Exception("Símbolo de atribuição inválido! Linha "+line);
 //                    return new Token(':');
                 }
@@ -157,6 +163,7 @@ public class Lexer {
                 readch();
                 char const_char = ch;
                 if(readch('\'')) return new Word(const_char+"", Tag.CONST_CHAR);
+                System.out.println("---------------------------------ERROR----------------------------------");
                 throw new Exception("Aspas simples de CHAR_CONST não fechada! Linha "+line);
             }
             case '\"' -> {
@@ -166,7 +173,10 @@ public class Lexer {
                     readch();
                 }while(ch != '\"');
                 if(ch=='\"') sb.append(ch);
-                else throw new Exception("Aspas duplas de LITERAK não fechada! Linha "+line);
+                else{
+                    System.out.println("---------------------------------ERROR----------------------------------");
+                    throw new Exception("Aspas duplas de LITERAl não fechada! Linha "+line);
+                }
                 readch();
                 
                 String s = sb.toString();
@@ -191,7 +201,8 @@ public class Lexer {
                     }
                 }
                 while(ch != -1);
-                 throw new Exception("Comentário não fechado! Linha "+line);
+                System.out.println("---------------------------------ERROR----------------------------------");
+                throw new Exception("Comentário não fechado! Linha "+line);
             }
             
         }
@@ -203,9 +214,14 @@ public class Lexer {
                 valueInt = 10*valueInt + Character.digit(ch,10);
                 readch();
             }while(Character.isDigit(ch));
+            if(Character.isLetter(ch)) {
+                System.out.println("---------------------------------ERROR----------------------------------");
+                throw new Exception("Int inválido! Linha "+line);
+            }
             if(ch != '.'){
                 return new Int(valueInt);
             }
+            
             
             float valueFloat = valueInt;
             float decimal = 10;
@@ -214,6 +230,10 @@ public class Lexer {
                 if(!Character.isDigit(ch) ) break;
                 valueFloat = valueFloat + Character.digit(ch, 10) / decimal; 
                 decimal = decimal*10;
+            }
+            if(Character.isLetter(ch)){
+                System.out.println("---------------------------------ERROR----------------------------------");
+                throw new Exception("Float inválido! Linha "+line);
             }
             return new Float(valueFloat);
         }
