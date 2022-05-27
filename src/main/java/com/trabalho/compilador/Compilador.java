@@ -1,8 +1,6 @@
 package com.trabalho.compilador;
 import com.trabalho.compilador.AnalisadorLexico.Lexer;
 import java.io.FileNotFoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Compilador {
 
