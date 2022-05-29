@@ -21,8 +21,11 @@ public class Lexer {
             System.out.println("Arquivo não encontrado");
             throw e;
         }
+        initTabelaSimbolos();
+    }
+    
+    private void initTabelaSimbolos() {
         ts = new TabelaSimbolos();
-
         ts.put(new Word("routine", Tag.ROUTINE));
         ts.put(new Word("begin", Tag.BEGIN));
         ts.put(new Word("end", Tag.END));
