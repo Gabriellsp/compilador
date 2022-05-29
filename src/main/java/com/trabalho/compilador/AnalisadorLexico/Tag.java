@@ -11,8 +11,8 @@ public class Tag {
             
             SUM=206,
             DIF=207,
-            MULT=207,
-            DIV=208,
+            MULT=208,
+            DIV=209,
             
             OP=211,
             CP=212,
@@ -48,6 +48,5 @@ public class Tag {
             LITERAL=240,
             BLOC_COMMENT=241,
             COMMA= 242
-            
             ;
 }
