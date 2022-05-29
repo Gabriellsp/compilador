@@ -1,6 +1,5 @@
 package com.trabalho.compilador.TabelaDeSimbolos;
 
-import com.trabalho.compilador.AnalisadorLexico.Token;
 import com.trabalho.compilador.AnalisadorLexico.Word;
 import java.util.HashMap;
 
@@ -14,6 +13,7 @@ public class TabelaSimbolos {
     public void put(Word w){
         table.put(w.toString(), w);
     }
+
     public void imprimirTable() {
         for (var pair : table.entrySet()) {
             System.out.println("LEXEME: "+pair.getKey()+ " - TAG: "+pair.getValue().tag);
@@ -25,8 +25,8 @@ public class TabelaSimbolos {
 
         if (found != null) 
             return found;
-        return null;
 
+        return null;
     }
 }
 

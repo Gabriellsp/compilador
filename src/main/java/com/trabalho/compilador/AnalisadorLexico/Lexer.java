@@ -1,5 +1,8 @@
 package com.trabalho.compilador.AnalisadorLexico;
 
+import com.trabalho.compilador.AnalisadorLexico.Constantes.Char;
+import com.trabalho.compilador.AnalisadorLexico.Constantes.Float;
+import com.trabalho.compilador.AnalisadorLexico.Constantes.Int;
 import com.trabalho.compilador.TabelaDeSimbolos.TabelaSimbolos;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

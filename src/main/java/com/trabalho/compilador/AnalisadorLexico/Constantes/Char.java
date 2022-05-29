@@ -1,4 +1,7 @@
-package com.trabalho.compilador.AnalisadorLexico;
+package com.trabalho.compilador.AnalisadorLexico.Constantes;
+
+import com.trabalho.compilador.AnalisadorLexico.Tag;
+import com.trabalho.compilador.AnalisadorLexico.Token;
 
 public class Char extends Token {
     

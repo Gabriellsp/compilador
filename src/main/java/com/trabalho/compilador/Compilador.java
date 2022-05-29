@@ -6,7 +6,7 @@ public class Compilador {
 
     public static void main(String[] args) {
         try {
-            var lexico = new Lexer("file.txt");
+            var lexico = new Lexer("codigo.txt");
             try {
                 lexico.returnTokensFromFile();
             } catch (Exception ex) {

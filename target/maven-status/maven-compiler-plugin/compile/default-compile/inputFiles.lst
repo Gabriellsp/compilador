@@ -1,10 +1,9 @@
 /Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Tag.java
 /Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Lexer.java
-/Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/TabelaDeSimbolos/Id.java
+/Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Constantes/Char.java
+/Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Constantes/Int.java
+/Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Constantes/Float.java
 /Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/TabelaDeSimbolos/TabelaSimbolos.java
 /Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Token.java
 /Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/Compilador.java
-/Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Char.java
-/Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Float.java
 /Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Word.java
-/Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Int.java
