@@ -10,8 +10,6 @@ public class Lexer {
     private final FileReader file;
     private char ch = ' '; 
     private TabelaSimbolos ts;
-    // instanciar TS
-    // private Hashtable words = new Hashtable();
     
     public Lexer(String filename) throws FileNotFoundException {
         try {
@@ -43,11 +41,6 @@ public class Lexer {
         ts.put(new Word("and", Tag.AND));
     }
     
-    private void reserve(Word w){
-        // adicionar na TS
-        // words.put(w.getLexeme(), w); 
-    }
-    
     private void readch() throws IOException{
         ch = (char) file.read();
     }
@@ -67,8 +60,7 @@ public class Lexer {
             
         }
         System.out.println("\n");
-         System.out.println("-------------------------TABELA DE SÍMBOLOS----------------------------");
-        System.out.println("TABELA DE SÍMBOLOS:");
+        System.out.println("-------------------------TABELA DE SÍMBOLOS----------------------------");
         ts.imprimirTable();
     }
     
@@ -123,8 +115,7 @@ public class Lexer {
                 }
                 else {
                     System.out.println("---------------------------------ERROR----------------------------------");
-                    throw new Exception("Símbolo de atribuição inválido! Linha "+line);
-//                    return new Token(':');
+                    throw new Exception("Símbolo de atribuição inválido na linha "+line+"!");
                 }
             }
             case '(' -> {
@@ -164,7 +155,7 @@ public class Lexer {
                 char const_char = ch;
                 if(readch('\'')) return new Char(const_char);
                 System.out.println("---------------------------------ERROR----------------------------------");
-                throw new Exception("Aspas simples de CHAR_CONST não fechada! Linha "+line);
+                throw new Exception("Constante do tipo Char inválida na linha "+line+"!");
             }
             case '\"' -> {
                 var sb = new StringBuffer();
@@ -184,11 +175,11 @@ public class Lexer {
                     }
                     else if(ch=='\n'){
                         System.out.println("---------------------------------ERROR----------------------------------");
-                        throw new Exception("Aspas dupla não fechada! Linha "+line);
+                        throw new Exception("Aspas dupla não fechada na linha "+line+"!");
                     }
                 }while(ch != 65535);
                 System.out.println("---------------------------------ERROR----------------------------------");
-                throw new Exception("Aspas dupla não fechada! Linha "+line);
+                throw new Exception("Aspas dupla não fechada na linha "+line+"!");
             }
             case '%' -> {
                 var sb = new StringBuffer();
@@ -209,7 +200,7 @@ public class Lexer {
                 }
                 while(ch != 65535);
                 System.out.println("---------------------------------ERROR----------------------------------");
-                throw new Exception("Comentário não fechado! Linha "+line);
+                throw new Exception("Comentário não fechado na linha "+line+"!");
             }
             
         }
@@ -223,12 +214,11 @@ public class Lexer {
             }while(Character.isDigit(ch));
             if(Character.isLetter(ch)) {
                 System.out.println("---------------------------------ERROR----------------------------------");
-                throw new Exception("Int inválido! Linha "+line);
+                throw new Exception("Constante do tipo Int inválida na linha "+line+"!");
             }
             if(ch != '.'){
                 return new Int(valueInt);
             }
-            
             
             float valueFloat = valueInt;
             float decimal = 10;
@@ -241,12 +231,12 @@ public class Lexer {
                 }while(Character.isDigit(ch));
                 if(Character.isLetter(ch)) {
                     System.out.println("---------------------------------ERROR----------------------------------");
-                    throw new Exception("Float inválido! Linha "+line);
+                    throw new Exception("Constante do tipo Float inválida na linha "+line+"!");
                 }
                 return new Float(valueFloat);
-            }else {
+            } else {
                 System.out.println("---------------------------------ERROR----------------------------------");
-                throw new Exception("Float inválido! Linha "+line); 
+                throw new Exception("Constante do tipo Float inválida na linha "+line+"!");
             }
         }
         

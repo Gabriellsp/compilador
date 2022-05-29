@@ -13,8 +13,6 @@ public class Tag {
             DIF=207,
             MULT=207,
             DIV=208,
-//            OR=209,
-//            AND=210,
             
             OP=211,
             CP=212,

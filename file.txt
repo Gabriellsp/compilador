@@ -1,28 +1,15 @@
+routine
 declare
- integer a, b, c, maior;
- char outro;
+ int a, b;
+ int resul;
+ float a,x;
 begin
- repeat
- write("A: ");
- read(a);
- write("B: ");
- read(b);
- write("C: ");
- read(c);
- if ( (a>b) and (a>c) ) end
- maior := a
-
- else
- if (b>c) then
- maior := b;
-
- else
- maior := c
- end
- end
- write("Maior valor:");
- write (maior);
- write ("Outro? (S/N)");
- read(outro);
- until (outro = 'N' || outro = 'n)
+ a := 12;
+ x := 12;
+ read (a);
+ read (b);
+ read (c)
+ result := (a*b + 1) / (c+2);
+ write "Resultado: ";
+ write (result);
 end
