@@ -3,6 +3,7 @@ package com.trabalho.compilador.AnalisadorLexico;
 import com.trabalho.compilador.AnalisadorLexico.Constantes.Char;
 import com.trabalho.compilador.AnalisadorLexico.Constantes.Float;
 import com.trabalho.compilador.AnalisadorLexico.Constantes.Int;
+import com.trabalho.compilador.AnalisadorSintatico.Sintatico;
 import com.trabalho.compilador.TabelaDeSimbolos.TabelaSimbolos;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -63,7 +64,9 @@ public class Lexer {
         while(ch != 65535) {
             var token = scan();
             System.out.println("Token: "+ token.toString() +" - "+ token.tag);
-            
+            System.out.println("oiiii");
+            var sintatico = new Sintatico(this);
+
         }
         System.out.println("\n");
         System.out.println("-------------------------TABELA DE SÍMBOLOS----------------------------");
