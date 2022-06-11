@@ -5,19 +5,12 @@ import java.io.FileNotFoundException;
 
 public class Compilador {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         try {
             var lexico = new Lexer("codigo.txt");
-            
-           // var sintatico = new Sintatico(lexico);
-            try {
-                lexico.returnTokensFromFile();
-//                System.out.println("oiiii");
-//                System.out.println(lexico);
-//                var sintatico = new Sintatico(lexico);
-//                sintatico.program();
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+            var sintatico = new Sintatico(lexico);
+            if(sintatico.start()){
+                System.out.println("Sucesso ao rodar o analisador sintático!");
             }
         } catch(FileNotFoundException e){
             System.out.println("Erro: "+e.getMessage());

@@ -8,7 +8,7 @@ public class Char extends Token {
     public final char value;
     
     public Char(char value){
-        super(Tag.CHAR);
+        super(Tag.CONST_CHAR);
         this.value = value;
     }
     public String toString(){

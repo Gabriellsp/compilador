@@ -7,7 +7,7 @@ public class Float extends Token {
     public final float value;
     
     public Float(float value){
-        super(Tag.FLOAT);
+        super(Tag.CONST_FLOAT);
         this.value = value;
     }
     public String toString(){
