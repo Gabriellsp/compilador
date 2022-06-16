@@ -171,9 +171,87 @@ public class Sintatico {
     }
 
     private void if_stmt() throws Exception {
-        
+      switch(token.tag){
+        case Tag.IF:
+            eat(Tag.IF);
+            condition();
+            eat(Tag.THEN);
+            stmt_list();
+            if_stmt_linha();
+            break;
+        default:
+           System.out.println("---------------------------------ERROR----------------------------------");
+           throw new Exception("Espera-se um IF na linha " + line + "!");
+      }
     }
 
+    private void if_stmt_linha() throws Exception {
+        switch (token.tag) {
+        case Tag.END:
+            eat(Tag.END);
+            break;
+        case Tag.ELSE:
+            eat(Tag.ELSE);
+            stmt_list();
+            eat(Tag.END);
+            break;
+        default:
+            System.out.println("---------------------------------ERROR----------------------------------");
+            throw new Exception("Espera-se um END ou Else na linha " + line + "!");
+        }
+    }
+
+    private void condition() throws Exception { 
+        switch(token.tag){
+            case Tag.ID:
+            case Tag.CONST_CHAR:
+            case Tag.CONST_FLOAT:
+            case Tag.CONST_INT:
+            case Tag.OP:
+            case Tag.NOT:
+            case Tag.DIF:
+                expression();
+                break;
+            default:
+              System.out.println("---------------------------------ERROR----------------------------------");
+              throw new Exception("Condition() " + line + "!");
+        }
+    }
+    
+    private void expression() throws Exception { 
+        switch(token.tag){
+            case Tag.ID:
+            case Tag.CONST_CHAR:
+            case Tag.CONST_FLOAT:
+            case Tag.CONST_INT:
+            case Tag.OP:
+            case Tag.NOT:
+            case Tag.DIF:
+                simple_expr();
+                expression_linha(); break;
+            default:
+              System.out.println("---------------------------------ERROR----------------------------------");
+              throw new Exception("Expression() " + line + "!");
+        }
+    }
+
+    private void expression_linha() throws Exception { 
+        switch(token.tag){
+            case Tag.ID:
+            case Tag.CONST_CHAR:
+            case Tag.CONST_FLOAT:
+            case Tag.CONST_INT:
+            case Tag.OP:
+            case Tag.NOT:
+            case Tag.DIF:
+                simple_expr();
+                expression_linha(); break;
+            default:
+              System.out.println("---------------------------------ERROR----------------------------------");
+              throw new Exception("Expression_linha() " + line + "!");
+        }
+    }
+    
     private void while_stmt() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
