@@ -1,15 +1,26 @@
 routine
 declare
- int a, b;
- int resul;
- float a,x;
+ int pontuacao, pontuacaoMaxina, disponibilidade;
+ char pontuacaoMinima;
 begin
- a := 12;
- x := 12;
- read (a);
- read (b);
- read (c)
- result := (a*b + 1) / (c+2);
- write "Resultado: ";
- write (result);
+ pontuacaoMinima := 50;
+ pontuacaoMaxima := 100;
+ write("Pontuacao do candidato: ");
+ read(pontuacao);
+ write("Disponibilidade do candidato: ");
+ read(disponibilidade);
+%
+Processamento
+%
+ while ((pontuacao>0) and (pontuacao<=pontuacaoMaxima)) do
+ if ((pontuação > pontuacaoMinima) and (disponibilidade=1)) then
+ write("Candidato aprovado.")
+ else
+ write("Candidato reprovado.")
+ end;
+ write("Pontuacao do candidato: ");
+ read(pontuacao);
+ write("Disponibilidade do candidato: ");
+ read(disponibilidade);
+ end;
 end

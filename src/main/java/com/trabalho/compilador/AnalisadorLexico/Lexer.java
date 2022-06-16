@@ -58,19 +58,16 @@ public class Lexer {
         return true;
     }
     
-//    public void returnTokensFromFile() throws Exception {  
-//        System.out.println("---------------------------------TOKENS---------------------------------");
-//        while(ch != 65535) {
-//            var token = scan();
-//            System.out.println("Token: "+ token.toString() +" - "+ token.tag);
-//            System.out.println("oiiii");
-//            var sintatico = new Sintatico(this);
-//
-//        }
-//        System.out.println("\n");
-//        System.out.println("-------------------------TABELA DE SÍMBOLOS----------------------------");
-//        ts.imprimirTable();
-//    }
+    public void returnTokensFromFile() throws Exception {  
+        System.out.println("---------------------------------TOKENS---------------------------------");
+        while(ch != 65535) {
+            var token = scan();
+            System.out.println("Token: "+ token.toString() +" - "+ token.tag);
+        }
+        System.out.println("\n");
+        System.out.println("-------------------------TABELA DE SÍMBOLOS----------------------------");
+        ts.imprimirTable();
+    }
     
     public Token scan() throws IOException, Exception{
         for( ; ; readch() ) {
@@ -91,11 +88,15 @@ public class Lexer {
             }
             case '<' -> {
                 readch();
-                return switch (ch) {
-                    case '=' -> Word.le;
-                    case '>' -> Word.ne;
-                    default -> Word.lt;
-                };
+                switch(ch){
+                    case '=': 
+                        readch();
+                        return Word.le;
+                    case '>': 
+                        readch();
+                        return Word.ne;
+                    default: return Word.lt;
+                }
             }
             case '=' -> {
                 readch();

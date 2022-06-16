@@ -16,6 +16,7 @@ public class Sintatico {
     
     private void advance() throws Exception {
         this.token = lex.scan();
+        if(token.tag == Tag.BLOC_COMMENT) advance();
     }
 
     private void eat(int tag) throws Exception {
@@ -120,6 +121,7 @@ public class Sintatico {
             case Tag.BEGIN -> {
                 eat(Tag.BEGIN);
                 stmt_list();
+                var x = token.tag;
                 eat(Tag.END);
             }
             default -> {
@@ -131,9 +133,16 @@ public class Sintatico {
 
     private void stmt_list() throws Exception {
         stmt();
+        do {
+            eat(Tag.SEMICOLON);
+            if(token.tag == Tag.END) break;
+            stmt();
+//            eat(Tag.SEMICOLON);
+        }while (token.tag == Tag.SEMICOLON);
     }
 
     private void stmt() throws Exception {
+        
         switch(token.tag){
             case Tag.ID:
                 assign_stmt();
@@ -167,7 +176,121 @@ public class Sintatico {
     }
     
     private void simple_expr() throws Exception {
-        
+        term();
+        simple_expr_linha();
+    }
+    
+    private void simple_expr_linha() throws Exception {
+        switch(token.tag){
+            case Tag.SUM:
+            case Tag.DIF:
+            case Tag.OR:
+                addop();
+                simple_expr();
+                break;
+            default:
+                break;
+        }
+    }
+    
+    private void term() throws Exception {
+        factor_a();
+        term_linha();
+    }
+    
+    private void term_linha() throws Exception {
+        switch(token.tag){
+            case Tag.MULT:
+            case Tag.DIV:
+            case Tag.AND:
+                mulop();
+                term();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void factor_a() throws Exception {
+        switch(token.tag){
+            case Tag.ID:
+            case Tag.CONST_CHAR:
+            case Tag.CONST_FLOAT:
+            case Tag.CONST_INT:
+            case Tag.OP:
+                factor();
+                break;
+            case Tag.NOT:
+                eat(Tag.NOT);
+                factor();
+                break;
+            case Tag.DIF:
+                eat(Tag.DIF);
+                factor();
+                break;
+            default:
+                System.out.println("---------------------------------ERROR----------------------------------");
+                throw new Exception("Espera-se um ID, CONSTANTE, (, NOT ou - na linha "+line+"!");
+        }
+    }
+    
+    private void factor() throws Exception {
+        switch(token.tag){
+            case Tag.ID:
+                eat(Tag.ID);
+                break;
+            case Tag.CONST_CHAR:
+                eat(Tag.CONST_CHAR);
+                break;
+            case Tag.CONST_FLOAT:
+                eat(Tag.CONST_FLOAT);
+                break;
+            case Tag.CONST_INT:
+                eat(Tag.CONST_INT);
+                break;
+            case Tag.OP:
+                eat(Tag.OP);
+                expression();
+                eat(Tag.CP);
+                break;
+            default:
+                System.out.println("---------------------------------ERROR----------------------------------");
+                throw new Exception("Espera-se um ID, CONSTANTE ou (  na linha "+line+"!");
+        }
+    }
+    
+    private void mulop() throws Exception {
+        switch(token.tag){
+            case Tag.MULT:
+                eat(Tag.MULT);
+                break;
+            case Tag.DIV:
+                eat(Tag.DIV);
+                break;
+            case Tag.AND:
+                eat(Tag.AND);
+                break;
+            default:
+                System.out.println("---------------------------------ERROR----------------------------------");
+                throw new Exception("Espera-se um *, / ou AND  na linha "+line+"!");
+        }
+    }
+    
+    private void addop() throws Exception {
+        switch(token.tag){
+            case Tag.SUM:
+                eat(Tag.SUM);
+                break;
+            case Tag.DIF:
+                eat(Tag.DIF);
+                break;
+            case Tag.OR:
+                eat(Tag.OR);
+                break;
+            default:
+                System.out.println("---------------------------------ERROR----------------------------------");
+                throw new Exception("Espera-se um +, - ou OR  na linha "+line+"!");
+        }
     }
 
     private void if_stmt() throws Exception {
@@ -237,29 +360,79 @@ public class Sintatico {
 
     private void expression_linha() throws Exception { 
         switch(token.tag){
-            case Tag.ID:
-            case Tag.CONST_CHAR:
-            case Tag.CONST_FLOAT:
-            case Tag.CONST_INT:
-            case Tag.OP:
-            case Tag.NOT:
-            case Tag.DIF:
+            
+            case Tag.EQ:
+            case Tag.GT:
+            case Tag.GE:
+            case Tag.LT:
+            case Tag.LE:
+            case Tag.NE:
+                relop();
                 simple_expr();
-                expression_linha(); break;
+                break;
+            default:
+                break;
+//              System.out.println("---------------------------------ERROR----------------------------------");
+//              throw new Exception("Expression_linha() " + line + "!");
+        }
+    }
+    
+    private void relop() throws Exception {
+        switch(token.tag){
+            case Tag.EQ:
+                eat(Tag.EQ);
+                break;
+            case Tag.GT:
+                eat(Tag.GT);
+                break;
+            case Tag.GE:
+                eat(Tag.GE);
+                break;
+            case Tag.LT:
+                eat(Tag.LT);
+                break;
+            case Tag.LE:
+                eat(Tag.LE);
+                break;
+            case Tag.NE:
+                eat(Tag.NE);
+                break;
             default:
               System.out.println("---------------------------------ERROR----------------------------------");
-              throw new Exception("Expression_linha() " + line + "!");
+              throw new Exception("Espera-se >, >=, <, <=  ou <> na linha " + line + "!");
         }
     }
     
     private void while_stmt() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        stmt_prefix();
+        stmt_list();
+        eat(Tag.END);
+    }
+    
+    private void stmt_prefix() throws Exception {
+        switch(token.tag){
+            case Tag.WHILE:
+                eat(Tag.WHILE);
+                condition();
+                eat(Tag.DO);
+                break;
+            default:
+                System.out.println("---------------------------------ERROR----------------------------------");
+                throw new Exception("Espera-se WHILE na linha " + line + "!");
+        }
     }
 
     private void repeat_stmt() throws Exception {
         eat(Tag.REPEAT);
+        stmt_list();
+        stmt_suffix();
     }
-
+    
+    private void stmt_suffix() throws Exception {
+        eat(Tag.UNTIL);
+        condition();
+    }
+    
     private void read_stmt() throws Exception {
         eat(Tag.READ);
         eat(Tag.OP);
@@ -275,7 +448,24 @@ public class Sintatico {
     }
 
     private void writable()throws Exception {
-        // implementar a bagaceira
+        switch(token.tag) {
+            case Tag.ID:
+            case Tag.CONST_CHAR:
+            case Tag.CONST_FLOAT:
+            case Tag.CONST_INT:
+            case Tag.OP:
+            case Tag.NOT:
+            case Tag.DIF:
+                simple_expr();
+                break;
+            case Tag.LITERAL:
+                eat(Tag.LITERAL);
+                break;
+            default:
+              System.out.println("---------------------------------ERROR----------------------------------");
+              throw new Exception("Expression() " + line + "!");
+        }
     }
+
 
 }

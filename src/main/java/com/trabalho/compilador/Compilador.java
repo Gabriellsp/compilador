@@ -9,6 +9,7 @@ public class Compilador {
         try {
             var lexico = new Lexer("codigo.txt");
             var sintatico = new Sintatico(lexico);
+//            lexico.returnTokensFromFile();
             if(sintatico.start()){
                 System.out.println("Sucesso ao rodar o analisador sintático!");
             }
