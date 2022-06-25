@@ -132,13 +132,34 @@ public class Sintatico {
     }
 
     private void stmt_list() throws Exception {
+        
         stmt();
         do {
             eat(Tag.SEMICOLON);
             if(token.tag == Tag.END) break;
+            if(token.tag == Tag.ELSE) break;
+            if( token.tag == Tag.UNTIL) break;
             stmt();
-//            eat(Tag.SEMICOLON);
         }while (token.tag == Tag.SEMICOLON);
+        
+        
+        if(token.tag != Tag.END) {              
+            if (this.token.tag == Tag.SEMICOLON){
+                advance();
+            } else {
+                if (this.token.tag == Tag.ELSE || this.token.tag == Tag.UNTIL){
+//                    System.out.println("Entrei no if" +  Tag.getTagName(token.tag)+ line);
+                }
+                
+                else {
+                    int myLine = line -1;                    
+                    if(token.tag < 1000)
+                        throw new Exception("Esperava-se a tag "+" "+Tag.SEMICOLON+" '"+Tag.getTagName(Tag.SEMICOLON)+"' na linha "+ myLine +"!");
+                }                
+            }
+        }
+        
+        
     }
 
     private void stmt() throws Exception {
@@ -251,6 +272,7 @@ public class Sintatico {
             case Tag.OP:
                 eat(Tag.OP);
                 expression();
+//                System.out.println("Ta no fecha parenteses " +  Tag.getTagName(token.tag)+ " " + token.tag);
                 eat(Tag.CP);
                 break;
             default:
@@ -311,9 +333,11 @@ public class Sintatico {
     private void if_stmt_linha() throws Exception {
         switch (token.tag) {
         case Tag.END:
+//            System.out.println("-----------------------Entro no IF----------------------------------");
             eat(Tag.END);
             break;
         case Tag.ELSE:
+//            System.out.println("-----------------------Entro no ELSE----------------------------------");
             eat(Tag.ELSE);
             stmt_list();
             eat(Tag.END);
@@ -423,12 +447,15 @@ public class Sintatico {
     }
 
     private void repeat_stmt() throws Exception {
+//        System.out.println("-------repeat_stmt()------repeat_stmt() ----repeat_stmt()-----");
         eat(Tag.REPEAT);
         stmt_list();
+//        System.out.println("-------UNTIL1 ---------UNTIL1 ----UNTIL1 ----UNTIL1 ---UNTIL1 -------");
         stmt_suffix();
     }
     
     private void stmt_suffix() throws Exception {
+//        System.out.println("-------stmt_suffix()-----stmt_suffix()-stmt_suffix()-------");
         eat(Tag.UNTIL);
         condition();
     }

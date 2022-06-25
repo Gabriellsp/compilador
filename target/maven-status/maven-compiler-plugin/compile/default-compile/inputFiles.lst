@@ -1,10 +1,10 @@
-/Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Tag.java
-/Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Lexer.java
-/Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Constantes/Char.java
-/Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/AnalisadorSintatico/Sintatico.java
-/Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Constantes/Int.java
-/Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Constantes/Float.java
-/Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/TabelaDeSimbolos/TabelaSimbolos.java
-/Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Token.java
-/Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/Compilador.java
-/Users/gabrielluis/Documents/Trabalhos_Faculdade/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Word.java
+/home/gabriel/Desktop/Matérias CEFET/Compiladores/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Tag.java
+/home/gabriel/Desktop/Matérias CEFET/Compiladores/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Constantes/Int.java
+/home/gabriel/Desktop/Matérias CEFET/Compiladores/compilador/src/main/java/com/trabalho/compilador/AnalisadorSintatico/Sintatico.java
+/home/gabriel/Desktop/Matérias CEFET/Compiladores/compilador/src/main/java/com/trabalho/compilador/Compilador.java
+/home/gabriel/Desktop/Matérias CEFET/Compiladores/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Lexer.java
+/home/gabriel/Desktop/Matérias CEFET/Compiladores/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Constantes/Float.java
+/home/gabriel/Desktop/Matérias CEFET/Compiladores/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Word.java
+/home/gabriel/Desktop/Matérias CEFET/Compiladores/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Token.java
+/home/gabriel/Desktop/Matérias CEFET/Compiladores/compilador/src/main/java/com/trabalho/compilador/AnalisadorLexico/Constantes/Char.java
+/home/gabriel/Desktop/Matérias CEFET/Compiladores/compilador/src/main/java/com/trabalho/compilador/TabelaDeSimbolos/TabelaSimbolos.java
