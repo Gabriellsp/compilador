@@ -1,10 +1,10 @@
 com/trabalho/compilador/AnalisadorLexico/Lexer.class
 com/trabalho/compilador/Compilador.class
-com/trabalho/compilador/AnalisadorLexico/Constantes/Char.class
 com/trabalho/compilador/AnalisadorSintatico/Sintatico.class
+com/trabalho/compilador/AnalisadorLexico/Constantes/Char.class
 com/trabalho/compilador/AnalisadorLexico/Word.class
 com/trabalho/compilador/AnalisadorLexico/Constantes/Int.class
 com/trabalho/compilador/AnalisadorLexico/Token.class
-com/trabalho/compilador/AnalisadorLexico/Tag.class
 com/trabalho/compilador/AnalisadorLexico/Constantes/Float.class
+com/trabalho/compilador/AnalisadorLexico/Tag.class
 com/trabalho/compilador/TabelaDeSimbolos/TabelaSimbolos.class

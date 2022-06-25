@@ -2,14 +2,15 @@ package com.trabalho.compilador;
 import com.trabalho.compilador.AnalisadorLexico.Lexer;
 import com.trabalho.compilador.AnalisadorSintatico.Sintatico;
 import java.io.FileNotFoundException;
+import javax.swing.JOptionPane;
 
 public class Compilador {
 
     public static void main(String[] args) throws Exception {
         try {
-            var lexico = new Lexer("codigo.txt");
+            String file = JOptionPane.showInputDialog("Digite o nome do arquivo a ser analisado:");
+            var lexico = new Lexer(file);
             var sintatico = new Sintatico(lexico);
-//            lexico.returnTokensFromFile();
             if(sintatico.start()){
                 System.out.println("Sucesso ao rodar o analisador sintático!");
             }
